@@ -13,7 +13,11 @@
         referrerPolicy: 'no-referrer', // no-referrer, *client
         body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
-    return response; // parses JSON response into native JavaScript objects
+    const text = await response.text();
+    if (text)
+        return JSON.parse(text);
+    else
+        return {}; // parses JSON response into native JavaScript objects
 }
 
 export const getData = async (url = '',) => {

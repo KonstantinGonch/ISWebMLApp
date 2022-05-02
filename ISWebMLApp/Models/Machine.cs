@@ -12,5 +12,7 @@ namespace ISWebMLApp.Models
         public string Description { get; set; }
         public string IP { get; set; }
         public long StructureId { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }

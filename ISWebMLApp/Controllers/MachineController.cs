@@ -1,4 +1,5 @@
 ﻿using ISWebMLApp.Models;
+using ISWebMLApp.Util;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,15 @@ namespace ISWebMLApp.Controllers
     {
         [HttpPost]
         [Route("save")]
-        public async void Save(Machine machine)
+        public async Task<Machine> Save(Machine machine)
         {
             using (var dbContext = new AppDataContext())
             {
+                machine.Login = Converter.ConvertToLatin(machine.HostName);
+                machine.Password = Converter.RandomString(10);
                 dbContext.Machines.Add(machine);
                 await dbContext.SaveChangesAsync();
+                return machine;
             }
         }
 

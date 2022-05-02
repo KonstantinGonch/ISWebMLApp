@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { getData } from '../util';
+import { StructureCard } from './StructureCard';
 
 export class StructurePage extends Component {
 
@@ -35,7 +36,8 @@ export class StructurePage extends Component {
                 {!this.state.loading &&
                     <div>
                         {this.state.structures.length === 0 && <h2>Информация отсутствует</h2>}
-                        <div class="row">
+                    <div class="row card-deck mb-3 text-center">
+                        {this.state.structures.map(stru => <StructureCard structure={ stru}/>)}
                         </div>
                         <div class="row">
                             <a class="link-primary" href="/addStructure">Добавить</a>
