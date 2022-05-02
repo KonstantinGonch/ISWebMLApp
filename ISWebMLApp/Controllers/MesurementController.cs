@@ -22,5 +22,15 @@ namespace ISWebMLApp.Controllers
                 await dbContext.SaveChangesAsync();
             }
         }
+
+        [HttpPost]
+        [Route("auth")]
+        public Machine Auth(Machine machine)
+        {
+            using (var dbContext = new AppDataContext())
+            {
+                return dbContext.Machines.FirstOrDefault(m => m.Login == machine.Login && m.Password == machine.Password);
+            }
+        }
     }
 }
