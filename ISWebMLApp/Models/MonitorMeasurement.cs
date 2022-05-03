@@ -13,5 +13,6 @@ namespace ISWebMLApp.Models
         public int CpuUsage { get; set; }
         public int RamUsage { get; set; }
         public long MonitorUserId { get; set; }
+        public bool ThreatFlag { get; set; }
     }
 }

@@ -16,6 +16,9 @@ namespace MonitorConsoleApp
         static readonly TimeSpan DELAY = TimeSpan.FromMinutes(5);
         static async Task Main(string[] args)
         {
+            bool threatFlag = false;
+            if (args.Length == 0 || args[0] == "threat")
+                threatFlag = true;
             var httpClient = new HttpClient();
             Console.WriteLine("Введите логин");
             var login = Console.ReadLine();
@@ -51,7 +54,8 @@ namespace MonitorConsoleApp
                         {"uptime", ((int)Math.Round(uptime.TotalMinutes)).ToString() },
                         {"cpuUsage", ((int)Math.Round(cpuPercent)).ToString() },
                         {"ramUsage", ((int)Math.Round(ramPercent)).ToString() },
-                        {"monitorUserId", hostId.ToString() }
+                        {"monitorUserId", hostId.ToString() },
+                        {"threatFlag", threatFlag.ToString() }
                     };
                     var measurementContent = new StringContent(JsonConvert.SerializeObject(measurementValues), Encoding.UTF8, "application/json");
                     var measurementResponse = await httpClient.PostAsync(SERVICE_URL + "/api/measurement/saveMeasurement", measurementContent);
